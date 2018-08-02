@@ -1,0 +1,78 @@
+---
+
+title: "Exploratory data analysis"
+author: "Indrajeet Kumar"
+date: "Jun 11, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(readr)
+read.csv("C:/Users/sony/Documents/pollution.csv")
+```
+```{r}
+head(pollution)
+dim(pollution)
+summary(pollution$pm25)
+ppm <- pollution$pm25
+quantile(ppm)
+```
+
+```{r}
+boxplot(ppm,col="blue")
+abline(h=12)
+```
+
+```{r}
+hist(ppm,col="green")
+rug(ppm)
+low
+high
+```
+
+```{r}
+hist(ppm,col="green",breaks=100)
+rug(ppm)
+```
+
+```{r}
+hist(ppm,col="green")
+abline(v=12, lwd=2)
+abline(v=median(ppm), col="magenta",lwd=4)
+```
+
+```{r}
+names(pollution)
+reg <- table(pollution$region)
+reg
+barplot(reg,col="wheat",main="Number of Counties in Each Region")
+```
+
+```{r}
+east <- subset(pollution,region=="east")
+head(east)
+hist(east$pm25,col="green")
+```
+
+```{r}
+hist(subset(pollution,region=="west")$pm25, col = "green")
+
+with(pollution, plot(latitude, pm25))
+```
+
+```{r}
+plot(pollution$latitude,ppm,col=pollution$region)
+abline(h = 12, lwd = 2, lty = 2)
+```
+
+```{r}
+par(mfrow = c(1, 2), mar = c(5, 4, 2, 1))
+west <- subset(pollution,region=="west")
+plot(west$latitude,west$pm25,main="West")
+plot(east$latitude,east$pm25,main="East")
+```
+
